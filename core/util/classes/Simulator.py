@@ -54,7 +54,6 @@ class Simulator:
         with self.lock:  # Ensure thread-safe access to the loop
             return asyncio.run_coroutine_threadsafe(coro, self.loop).result()
 
-    # Wrappers for external calls without needing async/await
     def takeoff(self):
         self.execute_in_loop(self._takeoff())
 
@@ -89,7 +88,6 @@ class Simulator:
         """Execute RC control with velocities."""
         self.execute_in_loop(self._rc_control(left_right, forward_backward, up_down, yaw))
 
-    # aliases
     def rotate_cw(self, duration):
         self.rotate_clockwise(duration)
 
@@ -97,7 +95,6 @@ class Simulator:
         self.rotate_counter_clockwise(duration)
 
 
-    # Actual coroutine implementations
     async def _takeoff(self):
         print("Simulator taking off.")
         await self.send_message({"command": "takeoff"})

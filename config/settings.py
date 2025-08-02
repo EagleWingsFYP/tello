@@ -1,10 +1,8 @@
 import sys
 import platform
 
-# Detect Platform
 platform = platform.system()
 
-# Debug
 debug = True
 if '-d' in sys.argv or '--debug' in sys.argv:
     debug = True
